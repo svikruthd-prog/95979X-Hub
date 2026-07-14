@@ -1,103 +1,52 @@
-import { firebaseConfig } from "./firebase-config.js";
+const message = document.getElementById("message");
 
 
-import { initializeApp } 
-from 
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+window.signup = async function () {
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
 
-import {
-
-getAuth,
-
-createUserWithEmailAndPassword,
-
-signInWithEmailAndPassword
-
-}
-
-from
-
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password
+    });
 
 
+    if (error) {
 
-const app = initializeApp(firebaseConfig);
+        message.innerHTML = error.message;
 
+    } else {
 
-const auth = getAuth(app);
+        message.innerHTML = "Account Created!";
 
+    }
 
-
-window.signup=function(){
-
-
-let email=document.getElementById("email").value;
-
-let password=document.getElementById("password").value;
+};
 
 
 
-createUserWithEmailAndPassword(
-auth,
-email,
-password
-)
+window.login = async function () {
 
-.then(()=>{
-
-message.innerHTML="Account Created!";
-
-})
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
 
-.catch(e=>{
-
-message.innerHTML=e.message;
-
-});
-
-
-}
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+    });
 
 
+    if (error) {
 
+        message.innerHTML = error.message;
 
-window.login=function(){
+    } else {
 
+        window.location = "dashboard.html";
 
-let email=document.getElementById("email").value;
+    }
 
-let password=document.getElementById("password").value;
-
-
-
-signInWithEmailAndPassword(
-
-auth,
-
-email,
-
-password
-
-)
-
-.then(()=>{
-
-
-window.location="dashboard.html";
-
-
-})
-
-
-.catch(e=>{
-
-
-message.innerHTML=e.message;
-
-
-});
-
-
-}
+};
