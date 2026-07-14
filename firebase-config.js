@@ -1,15 +1,8 @@
-export const firebaseConfig = {
+const SUPABASE_URL = "https://jzvzeyoapcchisguutzd.supabase.co/rest/v1/";
 
-apiKey:"YOUR_API_KEY",
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp6dnpleW9hcGNjaGlzZ3V1dHpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQwNTc1MzQsImV4cCI6MjA5OTYzMzUzNH0.Nd_qJyrR9NRFqkuyQf57O42fp6OyT0gmF1qlQUsbraI";
 
-authDomain:"YOUR_PROJECT.firebaseapp.com",
-
-projectId:"YOUR_PROJECT_ID",
-
-storageBucket:"YOUR_PROJECT.appspot.com",
-
-messagingSenderId:"YOUR_ID",
-
-appId:"YOUR_APP_ID"
-
-};
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
