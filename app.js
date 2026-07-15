@@ -7,19 +7,19 @@ window.signup = async function () {
     const password = document.getElementById("password").value;
 
 
-    const { data, error } = await supabaseClient.auth.signUp({
-        email: email,
-        password: password
-    });
+    try {
 
-
-    if (error) {
-
-        message.innerHTML = error.message;
-
-    } else {
+        await account.create(
+            Appwrite.ID.unique(),
+            email,
+            password
+        );
 
         message.innerHTML = "Account Created!";
+
+    } catch (error) {
+
+        message.innerHTML = error.message;
 
     }
 
@@ -33,19 +33,18 @@ window.login = async function () {
     const password = document.getElementById("password").value;
 
 
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
-    });
+    try {
 
-
-    if (error) {
-
-        message.innerHTML = error.message;
-
-    } else {
+        await account.createEmailPasswordSession(
+            email,
+            password
+        );
 
         window.location = "dashboard.html";
+
+    } catch (error) {
+
+        message.innerHTML = error.message;
 
     }
 
